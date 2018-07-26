@@ -10,7 +10,11 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.jams.itsolution.demoweather.R;
+import com.jams.itsolution.demoweather.model.ForcastAdapter;
+import com.jams.itsolution.demoweather.model.weatherData;
 import com.jams.itsolution.demoweather.presenter.MainPresenter;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements WeatherView{
 
@@ -47,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements WeatherView{
         progressBar.setVisibility(View.VISIBLE);
 
 
-
     }
 
     @Override
@@ -58,13 +61,13 @@ public class MainActivity extends AppCompatActivity implements WeatherView{
     }
 
     @Override
-    public void setAdapter() {
+    public void setAdapter(ArrayList<weatherData> weatherData) {
         bottomPanel.setVisibility(View.VISIBLE);
         ObjectAnimator animation = ObjectAnimator.ofFloat(bottomPanel,"transitionY",bottomPanel.getHeight(),0f);
         animation.setInterpolator(new AccelerateDecelerateInterpolator());
         animation.setDuration(500);
         animation.start();
-
+        temperature_list.setAdapter(new ForcastAdapter(weatherData, getBaseContext()));
 
     }
 }

@@ -1,7 +1,9 @@
 package com.jams.itsolution.demoweather.presenter;
 
+import com.jams.itsolution.demoweather.model.weatherData;
 import com.jams.itsolution.demoweather.view.WeatherView;
 
+import java.util.ArrayList;
 import java.util.logging.Handler;
 
 public class MainPresenter {
@@ -15,7 +17,6 @@ public class MainPresenter {
 
         this.weatherView = weatherView;
 
-
     }
 
 
@@ -23,19 +24,28 @@ public class MainPresenter {
 
        weatherView.showLoading();  // process Start .....
 
+       final ArrayList<weatherData> weatherData = new ArrayList<>();
+
 
          new android.os.Handler().postDelayed(new Runnable(){
 
              @Override
              public void run() {
+                 weatherView.hideLoading();
+
+                 for(int i = 0 ; i <10;i++){
+
+                     weatherData.add(new weatherData("23-jun-2018","Coludy","20/30","image"));
+
+                 }
 
 
 
-                 weatherView.hideLoading(); // Process Finished ......
-                 weatherView.setAdapter();
+                 weatherView.setAdapter(weatherData);
+                  // Process Finished ......
 
              }
-         },1500);
+         },1300);
 
 
     }
