@@ -6,5 +6,7 @@ public interface WeatherView {
 
    void hideLoading();
 
+   void setAdapter();
+
 
 }

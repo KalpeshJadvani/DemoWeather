@@ -32,7 +32,7 @@ public class MainPresenter {
 
 
                  weatherView.hideLoading(); // Process Finished ......
-
+                 weatherView.setAdapter();
 
              }
          },1500);
