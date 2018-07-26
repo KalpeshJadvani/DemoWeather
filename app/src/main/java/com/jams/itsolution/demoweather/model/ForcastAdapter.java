@@ -10,13 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jams.itsolution.demoweather.R;
+import com.jams.itsolution.demoweather.service.Const;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 
 public class ForcastAdapter extends RecyclerView.Adapter<ForcastAdapter.ForcastHolder> {
-    public ArrayList<weatherData> weatherData;
+    public ArrayList<Forecast.ForecastDay>  forecastDay;
     public Context mContext;
 
     @NonNull
@@ -30,17 +31,27 @@ public class ForcastAdapter extends RecyclerView.Adapter<ForcastAdapter.ForcastH
     @Override
     public void onBindViewHolder(@NonNull ForcastHolder holder, int position) {
 
-        holder.weatherDay.setText(weatherData.get(position).getDate());
-        holder.weatherText.setText(weatherData.get(position).getText());
-        holder.weatherTemp.setText(weatherData.get(position).getTemperature());
+        holder.weatherDay.setText(Const.ConvertDateToFormat(forecastDay.get(position).getDate()));
 
-        Picasso.with(mContext).load(R.drawable.clouds).into(holder.weatherIcon);
+        holder.weatherText.setText(forecastDay.get(position).getDay().getCondition().getText());
 
+        String uriLink = "http:"+forecastDay.get(position).getDay().getCondition().getIcon();
+
+
+        Picasso.with(mContext).load(uriLink).fit().centerCrop().into(holder.weatherIcon);
+
+        String maxTemp = String.format("%s°", (int)forecastDay.get(position).getDay().getMaxtempC());
+        String minTemp = String.format("%s°", (int)forecastDay.get(position).getDay().getMintempC());
+
+        String tempratue = minTemp+"/"+maxTemp;
+
+
+        holder.weatherTemp.setText(tempratue);
     }
 
     @Override
     public int getItemCount() {
-        return weatherData.size();
+        return forecastDay.size();
     }
 
 
@@ -60,9 +71,9 @@ public class ForcastAdapter extends RecyclerView.Adapter<ForcastAdapter.ForcastH
 
     }
 
-    public ForcastAdapter(ArrayList<weatherData> weatherData, Context context){
+    public ForcastAdapter(ArrayList<Forecast.ForecastDay> adapter, Context context){
 
-         this.weatherData = weatherData;
+         this.forecastDay = adapter;
          this.mContext = context;
 
 
