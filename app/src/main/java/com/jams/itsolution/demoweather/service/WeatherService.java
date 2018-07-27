@@ -1,9 +1,12 @@
 package com.jams.itsolution.demoweather.service;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WeatherService {
+
+
 
     private static Retrofit retrofit = null;
 

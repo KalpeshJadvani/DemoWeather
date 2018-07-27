@@ -19,6 +19,8 @@ import com.jams.itsolution.demoweather.presenter.MainPresenter;
 
 import java.util.ArrayList;
 
+import okhttp3.OkHttpClient;
+
 public class MainActivity extends AppCompatActivity implements WeatherView{
 
     ProgressBar loading_bar;
@@ -29,12 +31,20 @@ public class MainActivity extends AppCompatActivity implements WeatherView{
 
     TextView temperature,cityName,refreshapp;
 
+    WeatherView weatherView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loading_bar = findViewById(R.id.loading_bar);
+          weatherView = this;
+          mainPresenter = new MainPresenter(weatherView);
+
+
+         loading_bar = findViewById(R.id.loading_bar);
+
+
 
          topPanel = findViewById(R.id.topPanel);
          bottomPanel = findViewById(R.id.bottomPanel);
@@ -44,10 +54,10 @@ public class MainActivity extends AppCompatActivity implements WeatherView{
          cityName = findViewById(R.id.cityName);
          refreshapp = findViewById(R.id.refreshapp);
 
-         mainPresenter = new MainPresenter(this);
 
 
-        // mainPresenter.getWeather();  // Call for getting Data..
+
+         mainPresenter.getWeather();  // Call for getting Data..
 
 
         refreshapp.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements WeatherView{
 
     @Override
     public void showLoading() {
+
         refreshapp.setVisibility(View.INVISIBLE);
         loading_bar.setVisibility(View.VISIBLE);
 
@@ -78,8 +89,8 @@ public class MainActivity extends AppCompatActivity implements WeatherView{
     public void hideLoading() {
 
         loading_bar.setVisibility(View.INVISIBLE);
-
     }
+
 
     @Override
     public void setAdapter(ArrayList<Forecast.ForecastDay>  adapter) {

@@ -7,6 +7,7 @@ import com.jams.itsolution.demoweather.model.WeatherData;
 import com.jams.itsolution.demoweather.service.WeatherService;
 import com.jams.itsolution.demoweather.view.WeatherView;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,7 +30,7 @@ public class MainPresenter {
 
     public void onResume() {
         if (weatherView != null) {
-            getWeather();
+//            getWeather();
         }
 
 

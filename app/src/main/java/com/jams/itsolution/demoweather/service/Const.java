@@ -11,7 +11,7 @@ public class Const {
     public static final String API_KEY = "2070cdca105d4f5c913122559181807";
     public static final String BASE_URL = "http://api.apixu.com/v1/";
     public static final String CITY = "Bangalore";
-    public static final int DALY = 5;
+    public static final int DALY = 7;
 
 
     public static String ConvertDateToFormat(String input_date){
